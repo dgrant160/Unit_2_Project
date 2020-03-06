@@ -27,20 +27,21 @@
       information for the donor
       
 */
+// sets donations to 0
 var donationTotal = 0;
 
 donors.forEach(calcSum);
-
+// puts html in variable
 var summaryTable = "<table> \
             <tr><th>Donors</th><td>"+donors.length+"</td></tr> \
             <tr><th>Total Donations</th><td>$"+donationTotal.toLocaleString()+"</td></tr> \
             </table>";
 document.getElementById("donationSummary").innerHTML = summaryTable;
-
+//made filter var for major donors
 var majorDonors = donors.filter(findMajorDonors);
-
+// sorts donors
 majorDonors.sort(donorSortDescending);
-
+// adds more html to var
 var donorTable = "<table> \
          <caption>Major Donors</caption> \
          <tr> \
@@ -57,19 +58,19 @@ donorTable += "</table>";
 document.getElementById("donorTable").innerHTML = donorTable;
 
 
-
+// calculates total
 function calcSum(donorAmt) {
    donationTotal += donorAmt[9];
 }
-
+// finds major donors
 function findMajorDonors(donorAmt) {
    return donorAmt[9] >= 1000;
 }
-
+// orders donors
 function donorSortDescending(a, b) {
    return b[9] - a[9];
 }
-
+//adds donor table html
 function writeDonorRow(value) {
    donorTable += "<tr>";
    donorTable += "<td>$" + value[9].toLocaleString() + "</td>";   
@@ -82,27 +83,5 @@ function writeDonorRow(value) {
    donorTable += "</tr>";
 }
 
-function calcSum(donorAmt) {
-   donationTotal += donorAmt[9];
-}
 
-function findMajorDonors(donorAmt) {
-   return donorAmt[9] >= 1000;
-}
-
-function donorSortDescending(a, b) {
-   return b[9] - a[9];
-}
-
-function writeDonorRow(value) {
-   donorTable += "<tr>";
-   donorTable += "<td>$" + value[9].toLocaleString() + "</td>";   
-   donorTable += "<td>" + value[0] + "</td>";
-   donorTable += "<td>" + value[10] + "</td>";   
-   donorTable += "<td>" + value[2] + ", " + value[1] + "</td>";  
-   donorTable += "<td>" + value[3] + "<br />" + value[4] + ", " + value[5] + " " + value[6]  + "</td>";    
-   donorTable += "<td>" + value[7] + "</td>";   
-   donorTable += "<td>" + value[8] + "</td>";         
-   donorTable += "</tr>";
-}
 
